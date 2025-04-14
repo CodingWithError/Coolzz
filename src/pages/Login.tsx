@@ -3,10 +3,11 @@ import {
   Box,
   Container,
   Typography,
-  Button,
   TextField,
+  Button,
   Paper,
   Divider,
+  IconButton,
   useTheme,
   styled,
 } from '@mui/material';
@@ -16,39 +17,19 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/authSlice';
 
-const LoginContainer = styled(Container)(({ theme }) => ({
-  minHeight: 'calc(100vh - 64px)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const LoginCard = styled(Paper)(({ theme }) => ({
+const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
   width: '100%',
   maxWidth: 400,
-  borderRadius: theme.shape.borderRadius * 2,
-  background: theme.palette.background.paper,
-  position: 'relative',
-  overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 4,
-    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-  },
+  background: 'rgba(15, 14, 23, 0.8)',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
 }));
 
-const SocialButton = styled(Button)(({ theme }) => ({
-  width: '100%',
-  marginBottom: theme.spacing(2),
-  padding: theme.spacing(1.5),
+const GradientBorder = styled(Box)(({ theme }) => ({
+  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+  padding: '2px',
   borderRadius: theme.shape.borderRadius,
-  textTransform: 'none',
-  fontSize: '1rem',
 }));
 
 const Login = () => {
@@ -60,140 +41,153 @@ const Login = () => {
 
   const handleEmailLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // For demo purposes, we'll use the admin email to show admin features
-    const isAdmin = email === 'admin@example.com';
-    dispatch(
-      setUser({
-        id: '1',
-        email,
-        name: isAdmin ? 'Admin User' : 'Regular User',
-        role: isAdmin ? 'admin' : 'user',
-      })
-    );
+    // For demo, create a mock user
+    dispatch(setUser({
+      id: '1',
+      email,
+      name: email.split('@')[0],
+      role: email === 'admin@example.com' ? 'admin' : 'user',
+    }));
     navigate('/');
   };
 
   const handleGoogleLogin = () => {
-    // Implement Google sign-in logic here
-    dispatch(
-      setUser({
-        id: '2',
-        email: 'user@example.com',
-        name: 'Google User',
-        role: 'user',
-      })
-    );
+    // Mock Google login
+    dispatch(setUser({
+      id: '2',
+      email: 'user@gmail.com',
+      name: 'Google User',
+      role: 'user',
+      avatar: 'https://via.placeholder.com/40',
+    }));
     navigate('/');
   };
 
   return (
-    <LoginContainer>
+    <Container
+      maxWidth={false}
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.paper} 100%)`,
+        py: 4,
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        style={{ width: '100%' }}
       >
-        <LoginCard>
-          <Typography variant="h4" align="center" gutterBottom>
-            Welcome Back
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
-            color="text.secondary"
-            sx={{ mb: 4 }}
-          >
-            Sign in to continue shopping
-          </Typography>
-
-          <SocialButton
-            variant="outlined"
-            startIcon={<Google />}
-            onClick={handleGoogleLogin}
-          >
-            Continue with Google
-          </SocialButton>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', my: 3 }}>
-            <Divider sx={{ flex: 1 }} />
+        <GradientBorder>
+          <StyledPaper elevation={24}>
             <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mx: 2 }}
+              variant="h4"
+              gutterBottom
+              sx={{
+                fontWeight: 700,
+                textAlign: 'center',
+                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
             >
-              OR
+              Welcome Back
             </Typography>
-            <Divider sx={{ flex: 1 }} />
-          </Box>
+            <Typography
+              variant="body1"
+              sx={{ mb: 4, textAlign: 'center', color: 'text.secondary' }}
+            >
+              Sign in to continue shopping
+            </Typography>
 
-          <form onSubmit={handleEmailLogin}>
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              sx={{ mb: 2 }}
-              required
-            />
-            <TextField
-              fullWidth
-              label="Password"
-              variant="outlined"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              sx={{ mb: 3 }}
-              required
-            />
             <Button
-              type="submit"
-              variant="contained"
               fullWidth
-              size="large"
-              startIcon={<Email />}
+              variant="outlined"
+              startIcon={<Google />}
+              onClick={handleGoogleLogin}
+              sx={{ mb: 3 }}
             >
-              Sign in with Email
+              Continue with Google
             </Button>
-          </form>
 
-          <Box sx={{ mt: 3, textAlign: 'center' }}>
-            <Typography variant="body2" color="text.secondary">
-              Don't have an account?{' '}
+            <Box sx={{ position: 'relative', my: 3 }}>
+              <Divider>
+                <Typography
+                  variant="body2"
+                  sx={{ color: 'text.secondary', px: 1 }}
+                >
+                  OR
+                </Typography>
+              </Divider>
+            </Box>
+
+            <form onSubmit={handleEmailLogin}>
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                sx={{ mb: 3 }}
+              />
               <Button
-                color="primary"
-                onClick={() => navigate('/register')}
-                sx={{ textTransform: 'none' }}
+                fullWidth
+                type="submit"
+                variant="contained"
+                startIcon={<Email />}
+                sx={{ mb: 2 }}
               >
-                Sign up
+                Sign in with Email
               </Button>
-            </Typography>
-          </Box>
+            </form>
 
-          <Box
-            sx={{
-              mt: 4,
-              p: 2,
-              borderRadius: 1,
-              bgcolor: 'background.default',
-              textAlign: 'center',
-            }}
-          >
-            <Typography variant="body2" color="text.secondary" gutterBottom>
-              For demo purposes, use:
-            </Typography>
-            <Typography variant="body2" color="primary">
-              admin@example.com
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              to access admin features
-            </Typography>
-          </Box>
-        </LoginCard>
+            <Box sx={{ mt: 2, textAlign: 'center' }}>
+              <Typography variant="body2" color="text.secondary">
+                Don't have an account?{' '}
+                <Button
+                  color="primary"
+                  onClick={() => navigate('/signup')}
+                  sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                >
+                  Sign up
+                </Button>
+              </Typography>
+            </Box>
+
+            <Box sx={{ mt: 3, p: 2, bgcolor: 'background.paper', borderRadius: 1 }}>
+              <Typography variant="caption" color="text.secondary">
+                For demo purposes, use:
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  display: 'block',
+                  color: theme.palette.primary.main,
+                  fontFamily: 'monospace',
+                }}
+              >
+                admin@example.com
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                to access admin features
+              </Typography>
+            </Box>
+          </StyledPaper>
+        </GradientBorder>
       </motion.div>
-    </LoginContainer>
+    </Container>
   );
 };
 

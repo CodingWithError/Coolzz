@@ -147,7 +147,7 @@ const Cart = () => {
                       Color: {item.color}
                     </Typography>
                     <Typography variant="h6" color="primary">
-                      ₹{item.price.toLocaleString()}
+                      ${item.price.toLocaleString()}
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -187,7 +187,7 @@ const Cart = () => {
             <Box sx={{ my: 2 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography color="text.secondary">Subtotal</Typography>
-                <Typography>₹{total.toLocaleString()}</Typography>
+                <Typography>${total.toLocaleString()}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography color="text.secondary">Shipping</Typography>
@@ -195,14 +195,14 @@ const Cart = () => {
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography color="text.secondary">Tax</Typography>
-                <Typography>₹{(total * 0.18).toLocaleString()}</Typography>
+                <Typography>${(total * 0.18).toLocaleString()}</Typography>
               </Box>
             </Box>
             <Divider sx={{ my: 2 }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
               <Typography variant="h6">Total</Typography>
               <Typography variant="h6" color="primary">
-                ₹{(total * 1.18).toLocaleString()}
+                ${(total * 1.18).toLocaleString()}
               </Typography>
             </Box>
             <Button
@@ -219,7 +219,7 @@ const Cart = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <LocalShipping color="primary" fontSize="small" />
                 <Typography variant="body2">
-                  Free delivery on orders above ₹1000
+                  Free delivery on orders above $500
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

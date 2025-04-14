@@ -102,7 +102,7 @@ const ProductDetail: React.FC = () => {
               </Box>
 
               <Typography variant="h5" color="primary" gutterBottom>
-                ${product.price}
+                ${product.price.toFixed(2)}
               </Typography>
 
               <Typography variant="body1" paragraph>

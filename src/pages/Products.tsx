@@ -67,12 +67,12 @@ const Products = () => {
           onChange={(_, value) => dispatch(setFilters({ priceRange: value as [number, number] }))}
           valueLabelDisplay="auto"
           min={0}
-          max={100000}
-          step={1000}
+          max={1000}
+          step={10}
         />
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-          <Typography>₹{filters.priceRange[0]}</Typography>
-          <Typography>₹{filters.priceRange[1]}</Typography>
+          <Typography>${filters.priceRange[0]}</Typography>
+          <Typography>${filters.priceRange[1]}</Typography>
         </Box>
       </FilterSection>
 

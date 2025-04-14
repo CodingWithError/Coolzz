@@ -75,7 +75,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <PriceTag>₹{product.price.toLocaleString()}</PriceTag>
+      <PriceTag>${product.price.toFixed(2)}</PriceTag>
       <CardMedia
         component="img"
         height="200"

@@ -99,7 +99,7 @@ const AdminDashboard = () => {
     },
     {
       title: 'Revenue',
-      value: '₹4,28,900',
+      value: '$4,28,900',
       icon: AttachMoney,
       color: theme.palette.success.main,
     },
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
       id: '1',
       customer: 'John Doe',
       items: 3,
-      total: '₹45,000',
+      total: '$45,000',
       status: 'Pending',
       date: '2024-03-15',
     },
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
       id: '1',
       name: 'Premium AC 1.5 Ton',
       category: 'ac',
-      price: '₹35,000',
+      price: '$35,000',
       stock: 10,
     },
     // Add more products

@@ -32,7 +32,7 @@ const initialProducts: Product[] = [
   {
     id: '1',
     name: 'Premium AC 1.5 Ton',
-    price: 35000,
+    price: 499.99,
     image: 'placeholder.jpg',
     rating: 4.5,
     reviews: 128,
@@ -46,7 +46,7 @@ const initialProducts: Product[] = [
   {
     id: '2',
     name: 'Smart Fan 1200mm',
-    price: 4500,
+    price: 89.99,
     image: 'placeholder.jpg',
     rating: 4.2,
     reviews: 95,
@@ -60,7 +60,7 @@ const initialProducts: Product[] = [
   {
     id: '3',
     name: 'Inverter AC 2 Ton',
-    price: 45000,
+    price: 699.99,
     image: 'placeholder.jpg',
     rating: 4.8,
     reviews: 156,
@@ -74,7 +74,7 @@ const initialProducts: Product[] = [
   {
     id: '4',
     name: 'Table Fan 400mm',
-    price: 2500,
+    price: 49.99,
     image: 'placeholder.jpg',
     rating: 4.0,
     reviews: 78,
@@ -88,7 +88,7 @@ const initialProducts: Product[] = [
   {
     id: '5',
     name: 'Window AC 1 Ton',
-    price: 28000,
+    price: 399.99,
     image: 'placeholder.jpg',
     rating: 4.3,
     reviews: 112,
@@ -102,7 +102,7 @@ const initialProducts: Product[] = [
   {
     id: '6',
     name: 'Pedestal Fan 450mm',
-    price: 3500,
+    price: 69.99,
     image: 'placeholder.jpg',
     rating: 4.1,
     reviews: 64,
@@ -116,12 +116,12 @@ const initialProducts: Product[] = [
 ];
 
 const initialState: ProductsState = {
-  items: initialProducts, // Initialize with our product data
+  items: initialProducts,
   loading: false,
   error: null,
   filters: {
     category: null,
-    priceRange: [0, 100000],
+    priceRange: [0, 1000],
     colors: [],
     rating: null,
   },

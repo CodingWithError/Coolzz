@@ -21,8 +21,9 @@ import {
   Air,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
+import { logout } from '../store/slices/authSlice';
 import { motion } from 'framer-motion';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -60,6 +61,7 @@ const NavButton = styled(Button)(({ theme }) => ({
 const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useSelector((state: RootState) => state.auth);
   const { items } = useSelector((state: RootState) => state.cart);
@@ -70,6 +72,12 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    handleClose();
+    navigate('/');
   };
 
   return (
@@ -132,13 +140,28 @@ const Navbar = () => {
                   onClose={handleClose}
                 >
                   {user.role === 'admin' && (
-                    <MenuItem onClick={() => navigate('/admin')}>
+                    <MenuItem onClick={() => {
+                      handleClose();
+                      navigate('/admin');
+                    }}>
                       Admin Dashboard
                     </MenuItem>
                   )}
-                  <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
-                  <MenuItem onClick={() => navigate('/orders')}>Orders</MenuItem>
-                  <MenuItem onClick={() => navigate('/logout')}>Logout</MenuItem>
+                  <MenuItem onClick={() => {
+                    handleClose();
+                    navigate('/profile');
+                  }}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={() => {
+                    handleClose();
+                    navigate('/orders');
+                  }}>
+                    Orders
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    Logout
+                  </MenuItem>
                 </Menu>
               </>
             ) : (
